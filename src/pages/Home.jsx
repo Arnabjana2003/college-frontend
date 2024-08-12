@@ -13,7 +13,7 @@ import arrowLogo from '../assets/arrow-logo.png';
 import onTheWayLogo from '../assets/on-way-logo.png';
 import doneLogo from '../assets/done-logo.png';
 import status from '../assets/status.png';
-import { fetchRegistrations, fetchUserData } from '../components/centralApi';
+import { backendUrl, fetchRegistrations, fetchUserData } from '../components/centralApi';
 import { useQuery } from '@tanstack/react-query'
 
 const Home = () => {
@@ -106,8 +106,8 @@ const Home = () => {
     }));
 
     try {
-      await axios.post('/api/update-status/', { id, status: newStatus });
-      const res = await axios.get('/api/');
+      await axios.post(`${backendUrl}/update-status/`, { id, status: newStatus });
+      const res = await axios.get(`${backendUrl}/`);
       setRegistrations(res.data);
     } catch (err) {
       console.error(err);
